@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private bool isFacingRight;
     private float inputHoriz;
 
     [SerializeField] private float horizontalSpeed = 8f;
@@ -15,17 +14,31 @@ public class PlayerMovement : MonoBehaviour
 
     public bool grounded { get; private set; }
     public bool jumping { get; private set; }
+    public bool falling => velocity.y < 0f && !grounded;
 
     private Vector2 velocity;
 
     private Rigidbody2D rb;
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
        rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
+
+    private void OnEnable()
+    {
+        rb.isKinematic = false;
+        velocity = Vector2.zero;
+        jumping = false;
+    }
+
+    private void OnDisable()
+    {
+        rb.isKinematic = true;
+        velocity = Vector2.zero;
+        jumping = false;
+    }
+
     void Update()
     {
         HorizontalMovement();
