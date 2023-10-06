@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerMovement : MonoBehaviour
+public class simplePlayerMovement : MonoBehaviour
 {
     private float horizontal;
     private bool isFacingRight;
