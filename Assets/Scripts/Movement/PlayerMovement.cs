@@ -57,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // accelerate / decelerate
         inputHoriz = Input.GetAxis("Horizontal");
-        velocity.x = Mathf.MoveTowards(velocity.x, inputHoriz * horizontalSpeed, horizontalSpeed * Time.deltaTime);
+        velocity = new Vector2(inputHoriz * horizontalSpeed, velocity.y);
 
         // check if running into a wall
         if (rb.Raycast(Vector2.right * velocity.x))
